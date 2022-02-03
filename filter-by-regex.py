@@ -21,7 +21,17 @@ with open('pro-who-tweets.csv') as file:
 # -- Preprocessing: -- We don't care about the other data in our .csv. We want to only get the tweet text data in 'content' column.
 # -- Suggested approach: -- create a list variable and save the 'content' column of the pro-who-tweets.csv file as your list. Print the length of the list. See here for more: https://www.geeksforgeeks.org/python-read-csv-columns-into-list/
 
+# importing module (Isa)
+from pandas import *
 
+# reading CSV file (Isa)
+data = read_csv("pro-who-tweets.csv")
+
+# converting column data to list (Isa)
+content = data['content'].tolist()
+
+# printing list data (Isa)
+print('content:', content)
 
 
 
@@ -30,14 +40,21 @@ with open('pro-who-tweets.csv') as file:
 # -- First filter: -- Remove duplicates. 
 # -- Suggested approach: -- using your list, convert the list into a dictionary, which will automatically remove duplicates. Then convert your dictionary back into a list. Print the length of the list. https://www.w3schools.com/python/python_howto_remove_duplicates.asp
 
+#Create a dictionary (Isa)
+content = list( dict.fromkeys(content) )
+print(content)
 
+#Convert back to list (Isa)
+content = list( dict.fromkeys(content) ) 
+print(content)
 
 
 
 # -- Second filter: -- Remove tweets where the last non-whitespace character before the word 'who' is not a letter or a comma. See Lecture 3 slides for more explanation of this!
 # -- Suggested approach: -- Use the list you created as a result of the previous filter. Save the 10 possible pronouns in a list. Create a loop to run through each entry in your list. Use a conditional statement to construct a regular expression match, and save the list elements matching your condition. Print the length of the list.
 
-
+# converting column data to list
+content = data['content'].tolist()
 
 
 
