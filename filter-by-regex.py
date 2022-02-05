@@ -8,6 +8,8 @@
 
 # !!! You may need to run in your Shell: pip install pandas !!!
 
+
+
 import os
 import pandas
 import re
@@ -46,7 +48,7 @@ print(content)
 
 #Convert back to list (Isa)
 content = list( dict.fromkeys(content) ) 
-print(content)
+print(len(content))
 
 
 
@@ -56,6 +58,14 @@ print(content)
 # converting column data to list
 content = data['content'].tolist()
 
+pronoun_list: [she, her, he, him, they, them, i, you, we, us]
+
+otherlist = []
+for tweet_1 in content:
+  temp = re.findall("[A-Za-z,] who", tweet_1)
+  if temp != "":
+    otherlist.append(tweet_1)
+print(otherlist)
 
 
 # -- Third filter: -- Remove the pattern 'of PRO who'
