@@ -1,6 +1,8 @@
 # Initiated by Kelsey Kraus
 #
+
 # Contributors: <Percy Garcia, Isabella Polena, Claire Cruse> 
+
 #
 # Description: <UPDATE ME!> This file currently contains the instructions for replicating the data cleaning method implemented by CTK 2016.
 
@@ -42,14 +44,14 @@ print('content:', content)
 # -- First filter: -- Remove duplicates. 
 # -- Suggested approach: -- using your list, convert the list into a dictionary, which will automatically remove duplicates. Then convert your dictionary back into a list. Print the length of the list. https://www.w3schools.com/python/python_howto_remove_duplicates.asp
 
-#Create a dictionary (Isa)
-content = list( dict.fromkeys(content) )
+#Create a dictionary and convert back to list without duplicates (Isa)
+content = list(dict.fromkeys(content))
 print(content)
+
 
 #Convert back to list (Isa)
 content = list( dict.fromkeys(content) ) 
 print((content))
-
 
 
 # -- Second filter: -- Remove tweets where the last non-whitespace character before the word 'who' is not a letter or a comma. See Lecture 3 slides for more explanation of this!
