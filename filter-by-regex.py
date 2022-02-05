@@ -48,7 +48,7 @@ print(content)
 
 #Convert back to list (Isa)
 content = list( dict.fromkeys(content) ) 
-print(len(content))
+print((content))
 
 
 
@@ -58,33 +58,50 @@ print(len(content))
 # converting column data to list
 content = data['content'].tolist()
 
-pronoun_list: [she, her, he, him, they, them, i, you, we, us]
+pronoun_list: [she, her, he, him, they, them, i, you, we, us, it]
 
-otherlist = []
+filtertwo = []
 for tweet_1 in content:
-  temp = re.findall("[A-Za-z,] who", tweet_1)
+  temp = regex.findall("[A-Za-z,] who", tweet_1)
   if temp != "":
-    otherlist.append(tweet_1)
-print(otherlist)
+    filtertwo.append(tweet_1)
+print(filtertwo)
+print(len(filtertwo))
 
 
 # -- Third filter: -- Remove the pattern 'of PRO who'
 # -- Suggested approach: -- Create another loop, and another conditional statement using a regular expression from the list you got from the previous filter. This time, save only those that DO NOT match the conditional statement. Print the length of the list.
 
 
-
+filterthree = []
+for tweet_2 in filtertwo:
+  temp_2 = regex.findall("of (^she|^her|^he|^him|^they|^them|^i|^you|^we|^us|^it) who", tweet_2) 
+  if temp_2 != "":
+    filterthree.append(tweet_2)
+print(filterthree)
+print(len(filterthree))
+#temp_2 = regex.IGNORECASE("of (^she|^her|^he|^him|^they|^them|^i|^you|^we|^us|^it) who", tweet_2)
+#ill try that one tomorrow
 
 
 # -- Fourth filter: -- Remove tweets where the pronoun 'it' preceeds the word 'who' by 2-4 words
 # -- Suggested approach: -- Write a regular expression that picks out this pattern. Using the list you generated from the previous filter, use create a loop with a conditional statement that removes this pattern. Print the length of the list.
 
-
-
+filterfour = []
+for tweet_3 in filterthree:
+  temp_3 = regex.findall("it (.\w+){2,4} who", tweet_3)
+  if temp_3 == True:
+    filterfour.remove(tweet_3)
+  if temp_3 == False:
+    filterfour.append(tweet_3)
+print(filterfour)
+#this one is wrong i'm still trying to figure it out
 
 
 # -- Fifth filter: -- Remove tweets where 'PRO who' is preceded by the verbs 'ask', 'tell', 'wonder', 'inform', and 'show'.
 # -- Suggested approach: --  Save the verbs above into a list. Create a loop that iterates through your pronoun list from above, and removes examples that contain the pattern '[element-from-verb-list] [element-from-PRO-list]'. Print the length of the list.
 
+verb_list = ["ask", "tell", "wonder", "inform", "show"]
 
 
 
