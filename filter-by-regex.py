@@ -75,41 +75,49 @@ print(len(filtertwo))
 # -- Suggested approach: -- Create another loop, and another conditional statement using a regular expression from the list you got from the previous filter. This time, save only those that DO NOT match the conditional statement. Print the length of the list.
 
 
+
 filterthree = []
 for tweet_2 in filtertwo:
-  temp_2 = regex.findall("of (^she|^her|^he|^him|^they|^them|^i|^you|^we|^us|^it) who", tweet_2) 
+  tweet_2 = tweet_2.lower()
+  temp_2 = regex.sub("of (she|her|he|him|they|them|i|you|we|us|it) who", "", tweet_2) 
   if temp_2 != "":
     filterthree.append(tweet_2)
 print(filterthree)
 print(len(filterthree))
-#temp_2 = regex.IGNORECASE("of (^she|^her|^he|^him|^they|^them|^i|^you|^we|^us|^it) who", tweet_2)
-#ill try that one tomorrow
 
 
 # -- Fourth filter: -- Remove tweets where the pronoun 'it' preceeds the word 'who' by 2-4 words
 # -- Suggested approach: -- Write a regular expression that picks out this pattern. Using the list you generated from the previous filter, use create a loop with a conditional statement that removes this pattern. Print the length of the list.
 
+
 filterfour = []
 for tweet_3 in filterthree:
-  temp_3 = regex.findall("it (.\w+){2,4} who", tweet_3)
-  if temp_3 == True:
-    filterfour.remove(tweet_3)
-  if temp_3 == False:
+  temp_3 = regex.sub("it (.\w+){2,4} who", "", tweet_3)
+  if temp_3 != "":
     filterfour.append(tweet_3)
 print(filterfour)
-#this one is wrong i'm still trying to figure it out
-
+print(len(filterfour))
 
 # -- Fifth filter: -- Remove tweets where 'PRO who' is preceded by the verbs 'ask', 'tell', 'wonder', 'inform', and 'show'.
 # -- Suggested approach: --  Save the verbs above into a list. Create a loop that iterates through your pronoun list from above, and removes examples that contain the pattern '[element-from-verb-list] [element-from-PRO-list]'. Print the length of the list.
 
 verb_list = ["ask", "tell", "wonder", "inform", "show"]
 
+filterfive = [] 
+for tweet_4 in filterfour:
+  temp_4 = regex.sub("(she|her|he|him|they|them|i|you|we|us|it) who (ask|tell|wonder|inform|show)", "", tweet_4)
+  if temp_4 != "":
+    filterfive.append(tweet_4)
+print(filterfive)
+print(len(filterfive))
 
 
 # output your list as a .csv or .tsv file.
 
+df = pandas.DataFrame(filterfive)
+df.to_csv('file2.csv', index=False, header=False)
 
+#don't know if i did this right lol feel free to fix it
 
 
 
