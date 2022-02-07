@@ -1,3 +1,4 @@
+[ling144 report.pdf](https://github.com/Ling-144-winter2022-team-1/team-project/files/8013050/ling144.report.pdf)
 # CTK Replication
 
 This folder currently contains 4 files:
