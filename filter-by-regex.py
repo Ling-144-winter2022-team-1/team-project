@@ -51,7 +51,7 @@ print(content)
 
 #Convert back to list (Isa)
 content = list( dict.fromkeys(content) ) 
-print(len(content))
+print((content))
 
 
 # -- Second filter: -- Remove tweets where the last non-whitespace character before the word 'who' is not a letter or a comma. See Lecture 3 slides for more explanation of this!
@@ -60,14 +60,15 @@ print(len(content))
 # converting column data to list
 content = data['content'].tolist()
 
-pronoun_list: [she, her, he, him, they, them, i, you, we, us]
+pronoun_list: [she, her, he, him, they, them, i, you, we, us, it]
 
-otherlist = []
+filtertwo = []
 for tweet_1 in content:
-  temp = re.findall("[A-Za-z,] who", tweet_1)
+  temp = regex.findall("[A-Za-z,] who", tweet_1)
   if temp != "":
-    otherlist.append(tweet_1)
-print(otherlist)
+    filtertwo.append(tweet_1)
+print(filtertwo)
+print(len(filtertwo))
 
 
 # -- Third filter: -- Remove the pattern 'of PRO who'
@@ -75,24 +76,48 @@ print(otherlist)
 
 
 
+filterthree = []
+for tweet_2 in filtertwo:
+  tweet_2 = tweet_2.lower()
+  temp_2 = regex.sub("of (she|her|he|him|they|them|i|you|we|us|it) who", "", tweet_2) 
+  if temp_2 != "":
+    filterthree.append(tweet_2)
+print(filterthree)
+print(len(filterthree))
 
 
 # -- Fourth filter: -- Remove tweets where the pronoun 'it' preceeds the word 'who' by 2-4 words
 # -- Suggested approach: -- Write a regular expression that picks out this pattern. Using the list you generated from the previous filter, use create a loop with a conditional statement that removes this pattern. Print the length of the list.
 
 
-
-
+filterfour = []
+for tweet_3 in filterthree:
+  temp_3 = regex.sub("it (.\w+){2,4} who", "", tweet_3)
+  if temp_3 != "":
+    filterfour.append(tweet_3)
+print(filterfour)
+print(len(filterfour))
 
 # -- Fifth filter: -- Remove tweets where 'PRO who' is preceded by the verbs 'ask', 'tell', 'wonder', 'inform', and 'show'.
 # -- Suggested approach: --  Save the verbs above into a list. Create a loop that iterates through your pronoun list from above, and removes examples that contain the pattern '[element-from-verb-list] [element-from-PRO-list]'. Print the length of the list.
 
+verb_list = ["ask", "tell", "wonder", "inform", "show"]
 
+filterfive = [] 
+for tweet_4 in filterfour:
+  temp_4 = regex.sub("(she|her|he|him|they|them|i|you|we|us|it) who (ask|tell|wonder|inform|show)", "", tweet_4)
+  if temp_4 != "":
+    filterfive.append(tweet_4)
+print(filterfive)
+print(len(filterfive))
 
 
 # output your list as a .csv or .tsv file.
 
+df = pandas.DataFrame(filterfive)
+df.to_csv('file2.csv', index=False, header=False)
 
+#don't know if i did this right lol feel free to fix it
 
 
 
