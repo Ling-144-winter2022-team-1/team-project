@@ -14,7 +14,7 @@
 
 import os
 import pandas
-import re
+import regex
 
 allTweets = []
 with open('pro-who-tweets.csv') as file:
@@ -117,7 +117,6 @@ print(len(filterfive))
 df = pandas.DataFrame(filterfive)
 df.to_csv('file2.csv', index=False, header=False)
 
-#don't know if i did this right lol feel free to fix it
 
 
 
@@ -131,17 +130,17 @@ tweetList = ['this is a quote: he who shall not be named', 'who among us really'
 
 # This evaluates each tweet in TweetList for whether it contains the specified regex search, and whether that regex pattern in a tweet matches exactly to any other tweet in the list. If it does, it is assigned a value True. If it doesn't, it's assigned a value False.
 trueFalseList = []
-for tweet in tweetList:
-  whoPhrase = re.search("who \w+ \w+", tweet)
+for tweet_6 in filterfive:
+  whoPhrase = regex.search("who \w+ \w+", tweet_6)
   if whoPhrase is None:
       trueFalseList.append(False)
   else:
-      trueFalseList.append(any(whoPhrase.group(0) in t for t in tweetList))
+      trueFalseList.append(any(whoPhrase.group(0) in t for t in filterfive))
 print(trueFalseList)
 
 # The following takes our two lists, tweetList and trueFalseList, and zips them together. It then creates a dataframe out of this list, that can then be converted to a .csv file
 
-annotatedTweetList = list(zip(tweetList, trueFalseList))
-tweetDataframe = pandas.DataFrame(annotatedTweetList)
+annotatedfilterfive = list(zip(filterfive, trueFalseList))
+tweetDataframe = pandas.DataFrame(annotatedfilterfive)
 tweetDataframe.to_csv('literary-annotated-tweets.csv', header=["Tweets", "isLiterary"], index=False)
 
