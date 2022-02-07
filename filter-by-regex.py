@@ -32,10 +32,10 @@ from pandas import *
 data = read_csv("pro-who-tweets.csv")
 
 # converting column data to list (Isa)
-content = data['content'].tolist()
+tweet_list = data['content'].tolist()
 
 # printing list data (Isa)
-print('content:', content)
+print('content:', tweet_list)
 
 
 
@@ -45,25 +45,26 @@ print('content:', content)
 # -- Suggested approach: -- using your list, convert the list into a dictionary, which will automatically remove duplicates. Then convert your dictionary back into a list. Print the length of the list. https://www.w3schools.com/python/python_howto_remove_duplicates.asp
 
 #Create a dictionary and convert back to list without duplicates (Isa)
-content = list(dict.fromkeys(content))
+tweet_list = list(dict.fromkeys(tweet_list))
 print(content)
 
 
 #Convert back to list (Isa)
-content = list( dict.fromkeys(content) ) 
-print((content))
+tweet_list = list( dict.fromkeys(tweet_list) ) 
+print(tweet_list)
+print(len(tweet_list))
 
 
 # -- Second filter: -- Remove tweets where the last non-whitespace character before the word 'who' is not a letter or a comma. See Lecture 3 slides for more explanation of this!
 # -- Suggested approach: -- Use the list you created as a result of the previous filter. Save the 10 possible pronouns in a list. Create a loop to run through each entry in your list. Use a conditional statement to construct a regular expression match, and save the list elements matching your condition. Print the length of the list.
 
 # converting column data to list
-content = data['content'].tolist()
+tweet_list = data['content'].tolist()
 
 pronoun_list: [she, her, he, him, they, them, i, you, we, us, it]
 
 filtertwo = []
-for tweet_1 in content:
+for tweet_1 in tweet_list:
   temp = regex.findall("[A-Za-z,] who", tweet_1)
   if temp != "":
     filtertwo.append(tweet_1)
